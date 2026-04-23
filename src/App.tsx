@@ -1,15 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Download, CheckCircle, Copy, Check } from 'lucide-react';
 import { modsList } from './data/mods';
 
 export default function App() {
   const [copied, setCopied] = useState(false);
+  const [downloadedMods, setDownloadedMods] = useState<Record<string, boolean>>({});
   const serverIp = "sqt1-LhDk.aternos.me:24241";
+
+  // Load from Local Storage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('tortilla-downloaded-mods');
+      if (stored) setDownloadedMods(JSON.parse(stored));
+    } catch(e) {}
+  }, []);
 
   const copyIp = () => {
     navigator.clipboard.writeText(serverIp);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const toggleDownloaded = (id: string) => {
+    setDownloadedMods(prev => {
+      const next = { ...prev, [id]: !prev[id] };
+      localStorage.setItem('tortilla-downloaded-mods', JSON.stringify(next));
+      return next;
+    });
   };
 
   return (
@@ -49,13 +66,10 @@ export default function App() {
         
         {/* Left: Mod List (Density Focus) */}
         <section className="flex-1 p-4 md:p-6 border-b lg:border-b-0 lg:border-r border-[#2d2f36] bg-[#0f1115] flex flex-col min-h-0">
-          <div className="flex items-center justify-between mb-4 flex-shrink-0">
+          <div className="flex items-center mb-4 flex-shrink-0">
             <h2 className="text-[10px] md:text-xs font-bold text-[#8e9299] uppercase tracking-[0.2em]">
               Repositorio de Mods ({modsList.length} Archivos)
             </h2>
-            <button className="px-3 py-1.5 bg-[#2d2f36] hover:bg-[#3d404a] text-[10px] md:text-[11px] font-semibold text-white rounded transition-colors border border-[#444] shadow-sm">
-              Descargar Todo (.zip)
-            </button>
           </div>
           
           <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
@@ -76,12 +90,30 @@ export default function App() {
                   </div>
                   
                   <div className="space-y-2">
-                    {items.map((mod, index) => (
-                      <div key={mod.id} className="bg-[#1a1c23] border border-[#2d2f36] p-3 rounded flex items-center gap-3 hover:border-[#ffc72c] transition-all group relative overflow-hidden">
-                        <div className="w-8 h-8 flex-shrink-0 bg-[#2d2f36] rounded flex items-center justify-center text-xs font-mono text-[#8e9299] group-hover:text-white transition-colors relative z-10">
-                          {(index + 1).toString().padStart(2, '0')}
-                        </div>
-                        <div className="flex-1 min-w-0 relative z-10 flex flex-col justify-center">
+                    {items.map((mod, index) => {
+                      const isDownloaded = downloadedMods[mod.id] || false;
+                      return (
+                        <div key={mod.id} className={`bg-[#1a1c23] border border-[#2d2f36] p-3 rounded flex items-center gap-3 hover:border-[#ffc72c] transition-all group relative overflow-hidden ${isDownloaded ? 'opacity-60 grayscale-[30%]' : ''}`}>
+                          
+                          {/* Checkbox para rastrear decargas */}
+                          <button
+                            onClick={() => toggleDownloaded(mod.id)}
+                            className={`w-5 h-5 flex-shrink-0 cursor-pointer rounded flex items-center justify-center transition-colors border-2 ${
+                              isDownloaded 
+                                ? 'bg-[#ffc72c] hover:bg-[#ffc72c]/80 border-[#ffc72c] text-[#0c0d0f]' 
+                                : 'bg-[#0f1115] hover:bg-[#2d2f36]/50 border-[#2d2f36] hover:border-[#ffc72c]/50 text-transparent'
+                            }`}
+                            title={isDownloaded ? "Marcar como pendiente" : "Marcar como descargado"}
+                          >
+                            <Check className="w-3.5 h-3.5" strokeWidth={4} />
+                          </button>
+
+                          {/* Número correlativo del mod (Oculto en pantallas diminutas para ahorrar espacio junto a la checklist) */}
+                          <div className="w-8 h-8 flex-shrink-0 bg-[#2d2f36] rounded hidden sm:flex items-center justify-center text-xs font-mono text-[#8e9299] group-hover:text-white transition-colors relative z-10">
+                            {(index + 1).toString().padStart(2, '0')}
+                          </div>
+                          
+                          <div className="flex-1 min-w-0 relative z-10 flex flex-col justify-center">
                           <div className="flex items-center justify-start gap-1.5 md:gap-2 mb-0.5 md:mb-1 flex-wrap">
                             <h3 className="text-xs md:text-sm font-semibold text-white flex items-center gap-1.5 mr-1">
                               {mod.name}
@@ -112,13 +144,18 @@ export default function App() {
                           href={mod.downloadUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="relative z-10 flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#2d2f36]/50 hover:bg-[#ffc72c]/20 text-[#ffd659] border border-transparent hover:border-[#ffc72c]/50 transition-all ml-2"
+                          className={`relative z-10 flex items-center gap-1.5 px-3 py-1.5 rounded transition-all ml-2 border ${
+                            isDownloaded 
+                              ? 'bg-[#2d2f36]/20 text-[#8e9299] border-transparent hover:border-[#2d2f36]' 
+                              : 'bg-[#ffc72c]/10 hover:bg-[#ffc72c]/20 text-[#ffd659] border-[#ffc72c]/30 hover:border-[#ffc72c]/60 shadow-[0_0_10px_rgba(255,199,44,0.1)]'
+                          }`}
                         >
                           <span className="hidden sm:inline text-[10px] font-bold">DESCARGAR</span>
                           <Download className="w-3.5 h-3.5" />
                         </a>
                       </div>
-                    ))}
+                    );
+                    })}
                   </div>
                 </div>
               );
