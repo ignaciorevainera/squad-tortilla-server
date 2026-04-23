@@ -101,6 +101,16 @@ export const modsList: Mod[] = [
     dependencies: ['Balm', 'Balm (Fabric)', 'Fabric API']
   },
   {
+    id: 'jade',
+    name: 'Jade 🔍',
+    description: 'Muestra un pequeño panel en la parte superior de la pantalla indicando qué bloque, entidad o cultivo estás mirando.',
+    type: 'mod',
+    contentCategory: 'utilidad',
+    isRequired: false,
+    downloadUrl: 'https://www.curseforge.com/minecraft/mc-mods/jade/files/all?page=1&pageSize=20&version=1.21.10&gameVersionTypeId=4&showAlphaFiles=hide',
+    dependencies: ['Fabric API']
+  },
+  {
     id: 'cooking-for-blockheads',
     name: 'Cooking for Blockheads',
     description: 'Añade un libro de cocina y electrodomésticos funcionales para almacenar alimentos y craftear comidas fácilmente.',
