@@ -156,6 +156,26 @@ export default function App() {
               </p>
             </div>
           </div>
+
+          {/* Tutorial Iris Shaders */}
+          <div className="bg-[#1a1c23] rounded-xl border border-[#2d2f36] p-5 flex flex-col shrink-0">
+            <h3 className="text-[11px] md:text-xs font-bold text-white uppercase tracking-widest mb-4">Instalar Shaders (Opcional)</h3>
+            <div className="space-y-4">
+              <div className="flex gap-3">
+                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#16181d] border border-[#ffc72c]/50 flex items-center justify-center text-[10px] font-bold text-[#ffd659]">A</div>
+                <p className="text-[10px] md:text-[11px] text-[#8e9299]">Descarga el <span className="text-white">Universal JAR</span> desde la web oficial de Iris y ábrelo (requiere Java).</p>
+              </div>
+              <div className="flex gap-3">
+                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#16181d] border border-[#ffc72c]/50 flex items-center justify-center text-[10px] font-bold text-[#ffd659]">B</div>
+                <p className="text-[10px] md:text-[11px] text-[#8e9299]">Bajo el selector "Installation type", elige <span className="text-white font-bold">Fabric Install</span> para que siga siendo compatible con el resto de nuestros mods.</p>
+              </div>
+              <div className="flex gap-3">
+                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#16181d] border border-[#ffc72c]/50 flex items-center justify-center text-[10px] font-bold text-[#ffd659]">C</div>
+                <p className="text-[10px] md:text-[11px] text-[#8e9299]">Coloca cualquiera de los otros mods en tu carpeta <code className="text-white">mods</code> y juega usando tu nuevo perfil habilitado con Iris.</p>
+              </div>
+            </div>
+          </div>
+
         </aside>
       </main>
     </div>

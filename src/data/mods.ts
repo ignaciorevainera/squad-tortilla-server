@@ -89,5 +89,45 @@ export const modsList: Mod[] = [
     isRequired: false,
     downloadUrl: 'https://www.curseforge.com/minecraft/mc-mods/journeymap/files/all?page=1&pageSize=20&version=1.21.10&gameVersionTypeId=4&showAlphaFiles=hide',
     dependencies: ['Fabric API']
+  },
+  {
+    id: 'cooking-for-blockheads',
+    name: 'Cooking for Blockheads',
+    description: 'Añade un libro de cocina y electrodomésticos funcionales para almacenar alimentos y craftear comidas fácilmente.',
+    type: 'mod',
+    contentCategory: 'objetos',
+    isRequired: true,
+    downloadUrl: 'https://www.curseforge.com/minecraft/mc-mods/cooking-for-blockheads/files/all?page=1&pageSize=20&version=1.21.10&gameVersionTypeId=4&showAlphaFiles=hide',
+    dependencies: ['Balm', 'Balm (Fabric)', 'Fabric API']
+  },
+  {
+    id: 'sodium',
+    name: 'Sodium',
+    description: 'Motor de renderizado de última generación. Multiplica drásticamente los FPS y el rendimiento.',
+    type: 'mod',
+    contentCategory: 'rendimiento',
+    isRequired: false,
+    downloadUrl: 'https://modrinth.com/mod/sodium/versions?l=fabric&g=1.21.10',
+    dependencies: ['Fabric API']
+  },
+  {
+    id: 'iris',
+    name: 'Iris Shaders',
+    description: 'Permite instalar shaders asombrosos en Fabric. Altamente optimizado para Sodium.',
+    type: 'mod',
+    contentCategory: 'visual',
+    isRequired: false,
+    downloadUrl: 'https://modrinth.com/mod/iris/versions?g=1.21.10&l=fabric',
+    dependencies: ['Sodium', 'Fabric API']
+  },
+  {
+    id: 'shaders-list',
+    name: 'Directorio de Shaders',
+    description: 'Explora y descarga paquetes de iluminación y sombras (Shaders) compatibles con tu versión.',
+    type: 'shader',
+    contentCategory: 'visual',
+    isRequired: false,
+    downloadUrl: 'https://modrinth.com/discover/shaders',
+    dependencies: ['Iris Shaders']
   }
 ];
