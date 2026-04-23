@@ -5,9 +5,9 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-brand-purple: #7a49a5;
-  --color-brand-purple-light: #a855f7;
-  --color-brand-purple-mute: #c084fc;
+  --color-brand-primary: #ffc72c;
+  --color-brand-primary-light: #ffd659;
+  --color-brand-primary-mute: #ffe488;
   --color-brand-green: #4ade80;
   --color-brand-blue: #38bdf8;
   
@@ -34,6 +34,6 @@
     border-radius: 2px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: var(--color-brand-purple);
+    background: var(--color-brand-primary);
   }
 }
