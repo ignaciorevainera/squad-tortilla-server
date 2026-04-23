@@ -1,6 +1,6 @@
 {
-  "name": "Minecraft Server Mods",
-  "description": "Portal de descargas de mods de Minecraft para un servidor Fabric 1.21.10.",
+  "name": "Squad Tortilla Server",
+  "description": "Repositorio exclusivo de mods y dependencias para conectarse al mundo de Squad Tortilla en Minecraft Fabric 1.21.10.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }
